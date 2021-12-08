@@ -13,8 +13,7 @@ def order(request):
         form = PizzaForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            note = "Thanks for ordering, your {0} {1} and {2} pizza on the way".format(data["size"], data["topping1"],
-                                                                                       data["topping2"])
+            note = "Thanks for ordering, your  {1} and   {0} pizza on the way".format(data["size"], ", ".join(data["toppings"]))
             # messages.success(request,"Your order was successfully added")
             form = PizzaForm()
             return render(request, "pizza/order.html", context={"form": form, "note": note})
