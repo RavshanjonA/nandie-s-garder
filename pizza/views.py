@@ -10,10 +10,10 @@ def home(request):
 
 def order(request):
     if request.method == "POST":
-        form = PizzaForm(request.POST)
+        form = PizzaForm(request.POST, request.FILES)
         if form.is_valid():
             data = form.cleaned_data
-            note = "Thanks for ordering, your  {1} and   {0} pizza on the way".format(data["size"], ", ".join(data["toppings"]))
+            note = "Thanks for ordering, your  {1} and   {0} pizza on the way".format(data["size"], ", ".join([data["topping1"], data["topping2"]]))
             # messages.success(request,"Your order was successfully added")
             form = PizzaForm()
             return render(request, "pizza/order.html", context={"form": form, "note": note})
